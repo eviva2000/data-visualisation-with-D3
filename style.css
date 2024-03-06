@@ -1,4 +1,11 @@
-html, body {
+html,
+body {
   margin: 0;
   height: 100%;
+}
+
+g.group0 path,
+g.group0 circle {
+  fill: #ed0a0a;
+  stroke: aqua;
 }
