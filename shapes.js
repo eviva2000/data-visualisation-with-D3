@@ -7,6 +7,10 @@ let dataArray = [
 ];
 var dataArray2 = [5, 11, 18];
 let dataDays = ["Mon", "Wed", "Fri"];
+
+// Color scale
+let rainbow = d3.scaleSequential(d3.interpolateRainbow).domain([0, 10]);
+
 let x = d3.scaleBand().domain(dataDays).range([0, 170]); // 170 is the width of the chart
 let xAxis = d3.axisBottom(x);
 
@@ -27,7 +31,9 @@ svg
     return d * 15;
   })
   .attr("width", "50")
-  .attr("fill", "pink")
+  .attr("fill", function (d, i) {
+    return rainbow(i);
+  })
   .attr("x", function (d, i) {
     return 60 * i;
   })
