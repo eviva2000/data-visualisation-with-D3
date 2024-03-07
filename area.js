@@ -20,20 +20,34 @@ let dataYears = [
   "2015",
   "2016",
 ];
+let parseDate = d3.timeParse("%Y");
 
 let height = 200;
 let width = 500;
 let margin = { left: 50, right: 50, top: 40, bottom: 0 };
 
-let y = d3.scaleLinear().domain([0, 180]).range([height, 0]);
+let y = d3
+  .scaleLinear()
+  .domain([0, d3.max(dataArray)])
+  .range([height, 0]);
+
+let x = d3
+  .scaleTime()
+  .domain(
+    d3.extent(dataYears, function (d) {
+      return parseDate(d);
+    })
+  )
+  .range([0, width]);
 
 // Axix generator
 let yAxis = d3.axisLeft(y).ticks(3).tickPadding(10).tickSize(10);
+let xAxis = d3.axisBottom(x);
 
 let area = d3
   .area()
   .x(function (d, i) {
-    return i * 20;
+    return x(parseDate(dataYears[i]));
   })
   .y0(height)
   .y1(function (d) {
@@ -52,3 +66,8 @@ chartgroup = svg
 
 chartgroup.append("path").attr("d", area(dataArray));
 chartgroup.append("g").attr("class", "axis y").call(yAxis);
+chartgroup
+  .append("g")
+  .attr("class", "axis x")
+  .attr("transform", "translate(0," + height + ")")
+  .call(xAxis);

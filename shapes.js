@@ -5,6 +5,10 @@ let dataArray = [
   { x: 20, y: 10 },
   { x: 24, y: 5 },
 ];
+var dataArray2 = [5, 11, 18];
+let dataDays = ["Mon", "Wed", "Fri"];
+let x = d3.scaleBand().domain(dataDays).range([0, 170]); // 170 is the width of the chart
+let xAxis = d3.axisBottom(x);
 
 // Defining our canvas
 let svg = d3
@@ -13,38 +17,26 @@ let svg = d3
   .attr("height", "100%")
   .attr("width", "100%");
 
-// Line generator function
-let line = d3
-  .line()
-  .x(function (d, i) {
-    return d.x * 15;
-  })
-  .y(function (d, i) {
-    return d.y * 15;
-  });
+// Creating a bar chart
 svg
-  .append("path")
-  .attr("d", line(dataArray))
-  .attr("fill", "none")
-  .attr("stroke", "red");
-
-// Area generator
-let dataArray2 = [
-  25, 26, 28, 32, 37, 45, 55, 70, 90, 120, 135, 150, 160, 168, 172, 177, 180,
-];
-
-let height = 200;
-let width = 500;
-
-// Area generator function
-let area = d3
-  .area()
-  .x(function (d, i) {
-    return i * 20;
+  .selectAll("rect")
+  .data(dataArray2)
+  .enter()
+  .append("rect")
+  .attr("height", function (d, i) {
+    return d * 15;
   })
-  .y0(height)
-  .y1(function (d) {
-    return height - d;
+  .attr("width", "50")
+  .attr("fill", "pink")
+  .attr("x", function (d, i) {
+    return 60 * i;
+  })
+  .attr("y", function (d, i) {
+    return 300 - d * 15;
   });
 
-svg.append("path").attr("d", area(dataArray2)).attr("fill", "lightblue");
+svg
+  .append("g")
+  .attr("class", "x axis")
+  .attr("transform", "translate(0,300)")
+  .call(xAxis);
