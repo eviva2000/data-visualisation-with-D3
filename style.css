@@ -9,3 +9,7 @@ g.group0 circle {
   fill: #ed0a0a;
   stroke: aqua;
 }
+path {
+  stroke: green;
+  stroke-width: 2px;
+}

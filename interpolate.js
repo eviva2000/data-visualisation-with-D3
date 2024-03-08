@@ -66,7 +66,7 @@ for (let p = 0; p < 6; p++) {
     .attr("stroke", "blue");
 }
 
-// So far we learned 3 types of scales :linear, time series and ordinal scales, but D# has several other scales that can be used to map data to visual representation.
+// So far we learned 3 types of scales :linear, time series and ordinal scales, but D3 has several other scales that can be used to map data to visual representation.
 // Other linear scales : power, logarithmic, Natural log, sqrt.
 // Other ordinal scales : Band, Point, Ordinal.
 // Other color scales : Categorical, Sequential, Diverging.
