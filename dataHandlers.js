@@ -47,3 +47,10 @@ d3.json("treeData.json").get((error, data) => {
 d3.xml("data.xml").get((error, data) => {
   console.log(data);
 });
+
+// html data handler
+
+d3.html("https://enable-cors.org").get((error, data) => {
+  const frag = data.querySelector("div");
+  console.log(frag);
+});
