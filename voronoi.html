@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>D3.js</title>
+    <link rel="stylesheet" type="text/css" href="style.css" />
+    <script type="text/javascript" src="d3.v4.js"></script>
+  </head>
+  <style>
+    g.polygons path {
+      fill: white;
+      stroke: lightsteelblue;
+      stroke-width: 1px;
+    }
+
+    g.fuel circle {
+      fill: lightsteelblue;
+      stroke-width: 1px;
+    }
+  </style>
+  <body>
+    <script type="text/javascript">
+      const height = 500;
+      const width = 950;
+      // Creating some random data
+      const vertics = d3.range(100).map(function (d) {
+        return [Math.random() * width, Math.random() * height];
+      });
+
+      const voronoi = d3.voronoi().size([width, height]);
+      const svg = d3
+        .select("body")
+        .append("svg")
+        .attr("width", "100%")
+        .attr("height", "100%");
+      svg
+        .append("g")
+        .attr("class", "polygons")
+        .selectAll("path")
+        .data(voronoi(vertics).polygons())
+        .enter()
+        .append("path")
+        .attr("d", function (d) {
+          return "M" + d.join("L") + "Z";
+        });
+      svg
+        .append("g")
+        .attr("class", "fuel")
+        .selectAll("circle")
+        .data(vertics)
+        .enter()
+        .append("circle")
+        .attr("cx", function (d) {
+          return d[0];
+        })
+        .attr("cy", function (d) {
+          return d[1];
+        })
+        .attr("r", "2.5");
+    </script>
+  </body>
+</html>
