@@ -11,7 +11,7 @@ To run these visualizations locally, follow these steps:
 git clone https://github.com/eviva2000/data-visualisation-with-D3.git
 ```
 2. Run d3.html using "Live server" extension.
-3. Change the javascript source to view all exampoles.
+3. Change the javascript source to view all examples.
    
 Below is a list of the visualizations included in this repository. Each visualization is an experiment with different D3.js features and techniques.
 - Line graph
